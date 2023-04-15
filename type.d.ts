@@ -1,11 +1,13 @@
-
-type CodePracticeInfo = {
+type ScrapeData = {
+  source: string
+  id: string
+  display_id: string
   title: string
-  description: string
+  full_title: string
+  raw_description: string
   url: string
   tags: string[]
   difficulty: string
-  source: string
   sourceUrl: string
   code: string
   language: string

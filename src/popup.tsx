@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { sendToBackground } from '@plasmohq/messaging';
 
 function IndexPopup() {
-  const [data, setData] = useState<CodePracticeInfo>();
+  const [data, setData] = useState<ScrapeData>();
 
   useEffect(() => {
     async function getData() {
-      const resp = await sendToBackground<undefined, CodePracticeInfo>({
+      const resp = await sendToBackground<undefined, ScrapeData>({
         name: 'scrape'
       });
       setData(resp);
@@ -16,7 +16,7 @@ function IndexPopup() {
 
   return (
     <div>
-      {data ? JSON.stringify(data) : 'Loading...'}
+      {data ? JSON.stringify(data, null, 2) : 'Loading...'}
     </div>
   );
 }

@@ -1,19 +1,32 @@
-import acwingScraper from '~/scrapers/acwing';
-import cheerioFile from 'url:~/scrapers/cheerio.ts';
 import path from 'path';
+import aceFile from 'url:~/../assets/ace.min.js';
+import cheerioFile from 'url:~inject/cheerio.ts';
 
 import type { PlasmoMessaging } from '@plasmohq/messaging';
 
-const injectJquery = (tabId) =>
+import acwingScraper from '~/scrapers/acwing';
+
+const injectAce = (tabId) =>
   new Promise<void>((resolve, _reject) => {
     chrome.scripting.executeScript(
       {
         target: { tabId },
         world: 'MAIN',
-        files: [
-          // path.basename(jqueryFile).split('?')[0],
-          path.basename(cheerioFile).split('?')[0]
-        ]  // remove ?xxx
+        files: [path.basename(aceFile).split('?')[0]]
+      },
+      () => {
+        resolve();
+      }
+    );
+  });
+
+const injectCheerio = (tabId) =>
+  new Promise<void>((resolve, _reject) => {
+    chrome.scripting.executeScript(
+      {
+        target: { tabId },
+        world: 'MAIN',
+        files: [path.basename(cheerioFile).split('?')[0]]
       },
       () => {
         resolve();
@@ -22,7 +35,7 @@ const injectJquery = (tabId) =>
   });
 
 const scrape = (tabId) =>
-  new Promise<CodePracticeInfo>((resolve, _reject) => {
+  new Promise<ScrapeData>((resolve, _reject) => {
     chrome.scripting.executeScript(
       {
         target: {
@@ -47,9 +60,10 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
 
   console.log('scrape prepare to inject to', tab.url);
 
-  await injectJquery(tab.id);
+  await injectAce(tab.id);
+  await injectCheerio(tab.id);
 
-  console.log('jquery injected');
+  console.log('ace, cheerio injected');
 
   const result = await scrape(tab.id);
 
