@@ -35,7 +35,7 @@ const injectCheerio = (tabId) =>
   });
 
 const scrape = (tabId) =>
-  new Promise<ScrapeData>((resolve, _reject) => {
+  new Promise<ScrapeData>((resolve, reject) => {
     chrome.scripting.executeScript(
       {
         target: {
@@ -47,7 +47,10 @@ const scrape = (tabId) =>
       (injectionResults) => {
         const result = injectionResults[0].result;
         console.log('scrapedata result', result);
-        resolve(result);
+        if (result.data)
+          resolve(result.data);
+        else
+          reject(result.error);
       }
     );
   });
@@ -65,9 +68,12 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
 
   console.log('ace, cheerio injected');
 
-  const result = await scrape(tab.id);
-
-  res.send(result);
+  try {
+    const result = await scrape(tab.id);
+    res.send(result);
+  } catch (e) {
+    console.error('scrape error', e);
+  }
 };
 
 export default handler;

@@ -12,3 +12,8 @@ type ScrapeData = {
   code: string
   language: string
 }
+
+type InjectResponse<D> = {
+  data: D,
+  error?: Error,
+}
