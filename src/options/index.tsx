@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
 
 function OptionsIndex() {
-  const [data, setData] = useState("")
+  const [data, setData] = useState('');
 
   return (
     <div>
@@ -11,7 +11,7 @@ function OptionsIndex() {
       <h2>This is the Option UI page!</h2>
       <input onChange={(e) => setData(e.target.value)} value={data} />
     </div>
-  )
+  );
 }
 
-export default OptionsIndex
+export default OptionsIndex;
