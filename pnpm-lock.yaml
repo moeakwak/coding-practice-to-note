@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@plasmohq/messaging':
+    specifier: ^0.1.8
+    version: 0.1.8(react@18.2.0)
   plasmo:
     specifier: 0.68.0
     version: 0.68.0(react-dom@18.2.0)(react@18.2.0)
@@ -1681,6 +1684,17 @@ packages:
 
   /@plasmohq/init@0.6.3:
     resolution: {integrity: sha512-TdeisHX+Z0Rfez4251eCX0czcqnWO1OfurQhSQDijcmcjVU7r+IXh0svg7s+UVpCiHTagQ/JY+bnweuqnGPFHQ==}
+    dev: false
+
+  /@plasmohq/messaging@0.1.8(react@18.2.0):
+    resolution: {integrity: sha512-DXaFLR7O/QJc6TlOqTJV4uM029AaejE+bbqIDsxK+fp5k7u1xlDjdPORkN5BCKcpHVUH2GpPYO9zUrPy+5o12g==}
+    peerDependencies:
+      react: ^16.8.6 || ^17 || ^18
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@plasmohq/parcel-bundler@0.4.9:

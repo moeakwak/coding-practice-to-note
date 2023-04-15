@@ -1,26 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { sendToBackground } from "@plasmohq/messaging"
 
 function IndexPopup() {
-  const [data, setData] = useState("")
+  const [data, setData] = useState<CodePracticeInfo>()
+
+  useEffect(() => {
+    async function getData() {
+      const resp = await sendToBackground<undefined, CodePracticeInfo>({
+        name: "scrapedata"
+      })
+      setData(resp)
+    }
+    getData()
+  }, [setData])
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        padding: 16
-      }}>
-      <h2>
-        Welcome to your{" "}
-        <a href="https://www.plasmo.com" target="_blank">
-          Plasmo
-        </a>{" "}
-        Extension!
-      </h2>
-      <input onChange={(e) => setData(e.target.value)} value={data} />
-      <a href="https://docs.plasmo.com" target="_blank">
-        View Docs
-      </a>
+    <div>
+      {data ? JSON.stringify(data) : "Loading..."}
     </div>
   )
 }
