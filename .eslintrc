@@ -25,11 +25,29 @@
       "version": "18.2"
     }
   },
-  "plugins": ["react", "@typescript-eslint/eslint-plugin"],
+  "plugins": [
+    "react",
+    "@typescript-eslint/eslint-plugin"
+  ],
   "rules": {
-    "indent": ["error", 2],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
+    "indent": [
+      "error",
+      2
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
     "react/display-name": 0,
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0
