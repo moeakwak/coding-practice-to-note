@@ -7,7 +7,7 @@ function IndexPopup() {
   useEffect(() => {
     async function getData() {
       const resp = await sendToBackground<undefined, CodePracticeInfo>({
-        name: 'scrapedata'
+        name: 'scrape'
       });
       setData(resp);
     }
